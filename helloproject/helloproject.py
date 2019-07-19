@@ -113,3 +113,4 @@ def members_to_databases(members):
 if __name__ == '__main__':
     groups = fetch_artist_page()
     all_members = fetch_group_members(groups)
+    members_to_databases(all_members)

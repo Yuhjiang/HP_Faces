@@ -3,7 +3,6 @@
 """
 
 import unittest
-from utils.image import image_to_base64
 from face import client
 import time
 from face.face_dataset import (face_detect,

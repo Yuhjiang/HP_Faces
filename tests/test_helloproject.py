@@ -14,18 +14,18 @@ from helloproject.helloproject import (fetch_artist_page,
 
 
 class TestHelloProject(unittest.TestCase):
-    def setUp(self):
-        client = pymongo.MongoClient(Mongodb_uri)
-        my_db = client['helloproject']
-        collections = my_db.list_collection_names()
-        # 判断是否存在 groups
-        if 'groups' in collections:
-            groups = my_db['groups']
-            groups.drop()
-        if 'members' in collections:
-            members = my_db['members']
-            members.drop()
-        client.close()
+    # def setUp(self):
+    #     client = pymongo.MongoClient(Mongodb_uri)
+    #     my_db = client['helloproject']
+    #     collections = my_db.list_collection_names()
+    #     # 判断是否存在 groups
+    #     if 'groups' in collections:
+    #         groups = my_db['groups']
+    #         groups.drop()
+    #     if 'members' in collections:
+    #         members = my_db['members']
+    #         members.drop()
+    #     client.close()
 
     @unittest.skip
     def test_fetch_artist_page(self):

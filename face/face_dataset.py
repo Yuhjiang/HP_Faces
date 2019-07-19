@@ -39,9 +39,8 @@ def face_register(image_path):
             path = os.path.join(image_path, group_dir, m)
             image = image_to_base64(path)
             res = client.addUser(image, 'BASE64', 'Hello_Project', m.split('.', 1)[0])
-            print(res)
             time.sleep(0.5)     # QPS 2的限制，每秒请求不能超过2次
 
 
-# if __name__ == '__main__':
-#
+if __name__ == '__main__':
+    face_register(r'E:\Program\Python\HP_Face\faces\pictures_from_hello_project')
