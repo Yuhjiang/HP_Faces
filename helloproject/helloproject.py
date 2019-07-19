@@ -7,6 +7,7 @@
 import requests
 import bs4
 import pymongo
+import os
 from config.config import Mongodb_uri
 from utils.image import download_picture
 
@@ -52,7 +53,7 @@ def group_to_database(groups):
     group_db.insert_many(groups)
 
 
-def members_from_profile(url):
+def members_from_profile(url, download=False):
     """
     从每个组合profile页面提取成员信息
     :param url: 各组合的profile网页 http://www.helloproject.com/morningmusume/profile/
@@ -70,9 +71,14 @@ def members_from_profile(url):
         birthday = m.select('dd')[0].getText()
         location = m.select('dd')[2].getText()
         group = url.split('/')[3]
+        image_url = m.select('img')[0].get('src')
 
         member = dict(name_en=name_en, name_jp=name_jp, birthday=birthday, location=location, group=group)
         all_members.append(member)
+
+        if download:
+            # 下载当前成员照片
+            download_picture(image_url, os.path.join('../images/helloproject', group), name_en + '.jpg')
 
     return all_members
 
@@ -90,3 +96,20 @@ def fetch_group_members(groups):
         all_members += members
 
     return all_members
+
+
+def members_to_databases(members):
+    """
+    将成员信息保存到mongodb中
+    :param members:{'name_en': 'mizuki_fukumura', 'name_jp': '譜久村聖', 'birthday': '1996/10/30', 'location': '東京都', 'group': 'morningmusume'}
+    """
+    client = pymongo.MongoClient(Mongodb_uri)
+    my_db = client['helloproject']
+    members_db = my_db['members']
+
+    members_db.insert_many(members)
+
+
+if __name__ == '__main__':
+    groups = fetch_artist_page()
+    all_members = fetch_group_members(groups)

@@ -4,7 +4,8 @@
 
 import unittest
 import os
-from utils.image import download_picture
+from utils.image import (download_picture,
+                         image_to_base64)
 
 
 class TestUtilsImage(unittest.TestCase):
@@ -19,3 +20,8 @@ class TestUtilsImage(unittest.TestCase):
         name = 'test.jpg'
 
         download_picture(url, path, name)
+
+    def test_image_to_base64(self):
+        image_base64 = image_to_base64('../images/helloproject/morningmusume/mizuki_fukumura.jpg')
+
+        self.assertTrue(image_base64 is not None)

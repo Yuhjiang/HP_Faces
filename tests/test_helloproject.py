@@ -8,7 +8,9 @@ from config.config import Mongodb_uri
 from helloproject.helloproject import (fetch_artist_page,
                                        group_to_database,
                                        members_from_profile,
-                                       fetch_group_members)
+                                       fetch_group_members,
+                                       members_to_databases,
+                                       )
 
 
 class TestHelloProject(unittest.TestCase):
@@ -20,6 +22,9 @@ class TestHelloProject(unittest.TestCase):
         if 'groups' in collections:
             groups = my_db['groups']
             groups.drop()
+        if 'members' in collections:
+            members = my_db['members']
+            members.drop()
         client.close()
 
     @unittest.skip
@@ -49,7 +54,6 @@ class TestHelloProject(unittest.TestCase):
         my_db = client['helloproject']
         groups = my_db['groups']
         group = groups.find_one({'name_en': 'morningmusume'})
-
         self.assertTrue(group is not None)
 
     @unittest.skip
@@ -67,3 +71,16 @@ class TestHelloProject(unittest.TestCase):
         result = {'name_en': 'mizuki_fukumura', 'name_jp': '譜久村聖', 'birthday': '1996年10月30日', 'location': '東京都', 'group': 'morningmusume'}
 
         self.assertTrue(all_members[0] == result)
+
+    @unittest.skip
+    def test_members_to_databases(self):
+        groups = fetch_artist_page()
+        all_members = fetch_group_members(groups)
+        members_to_databases(all_members)
+
+        client = pymongo.MongoClient(Mongodb_uri)
+        my_db = client['helloproject']
+        members_db = my_db['members']
+
+        member = members_db.find_one()
+        self.assertTrue(member is not None)
