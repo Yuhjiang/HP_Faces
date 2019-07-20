@@ -2,6 +2,7 @@ from face import client, my_db
 from utils.image import image_to_base64
 from config.config import image_path
 import os
+import time
 
 images_db = my_db['images']
 members_db = my_db['members']
@@ -66,27 +67,43 @@ def face_to_databases(image, face):
     :param face: face_multi_search()返回的数据
     """
     result = face['result']
+    print(result)
     face_list = result['face_list']
     members = []
     for f in face_list:
-        name_en = f['user_list'][0]['user_id']
-        # 在members数据库找到相应成员
-        member = members_db.find_one({'name_en': name_en})
-        members.append({
-            '_id': member['_id'],
-            'name_en': member['name_en'],
-            'name_jp': member['name_jp'],
-            'group': member['group'],
-        })
+        try:
+            name_en = f['user_list'][0]['user_id']
+            # 在members数据库找到相应成员
+            member = members_db.find_one({'name_en': name_en})
+            members.append({
+                '_id': member['_id'],
+                'name_en': member['name_en'],
+                'name_jp': member['name_jp'],
+                'group': member['group'],
+            })
+        except IndexError as e:
+            pass
 
-    members = {'$set': {'members': members}}
+    members = {'$set': {'members': members, 'searched': 1}}
     query = {
         'url': image['url']
     }
     images_db.update_one(query, members)
 
 
+def face_search():
+    """
+    识别所有图片
+    :return:
+    """
+    face_to_search = images_db.find({'searched': 0, 'downloaded': 1})
+    for face in face_to_search:
+        face_multi_search(face, 'BASE64', save=True)
+        time.sleep(0.5)
+
+
 if __name__ == '__main__':
-    image = images_db.find_one({'name': '785f6650gy1g54e5db3g7j20u00u0n95.jpg'})
-    res = face_multi_search(image, 'BASE64')
-    face_to_databases(image, res)
+    # image = images_db.find_one({'name': '785f6650gy1g54e5db3g7j20u00u0n95.jpg'})
+    # res = face_multi_search(image, 'BASE64')
+    # face_to_databases(image, res)
+    face_search()
