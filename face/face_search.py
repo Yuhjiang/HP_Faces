@@ -52,11 +52,17 @@ def face_multi_search(image, image_type, group_id_list='Hello_Project', save=Fal
         img = image_to_base64(os.path.join(image_path, image['name']))
     else:
         img = image['url']
-    res = client.multiSearch(img, image_type, group_id_list, options)
-
+    try:
+        res = client.multiSearch(img, image_type, group_id_list, options)
+    except:
+        res = {'error_msg': 'FAIL'}
     if save and res['error_msg'] == 'SUCCESS':
         face_to_databases(image, res)
 
+    images_db.update(
+        {'url': image['url']},
+        {'$set': {'success': 1}}
+    )
     return res
 
 
@@ -96,10 +102,10 @@ def face_search():
     识别所有图片
     :return:
     """
-    face_to_search = images_db.find({'searched': 0, 'downloaded': 1})
+    face_to_search = images_db.find({'searched': 0, 'downloaded': 1, 'success': 0})
     for face in face_to_search:
         face_multi_search(face, 'BASE64', save=True)
-        time.sleep(0.5)
+        time.sleep(0.4)
 
 
 if __name__ == '__main__':

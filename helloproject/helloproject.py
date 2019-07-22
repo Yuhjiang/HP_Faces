@@ -111,7 +111,46 @@ def members_to_databases(members):
 
 
 if __name__ == '__main__':
-    groups = fetch_artist_page()
-    # all_members = fetch_group_members(groups)
-    # members_to_databases(all_members)
-    group_to_database(groups)
+    # groups = fetch_artist_page()
+    # # all_members = fetch_group_members(groups)
+    # # members_to_databases(all_members)
+    # group_to_database(groups)
+    m1 = {
+        'name_en': 'maho_aikawa',
+        'name_jp': '相川茉穂',
+        'birthday': '1999年3月26日',
+        'location': '神奈川県',
+        'group': 'angerme'
+    }
+    m2 = {
+        'name_en': 'memi_tamura',
+        'name_jp': '田村芽実',
+        'birthday': '1998年10月30日',
+        'location': '群馬県',
+        'group': 'angerme'
+    }
+    m3 = {
+        'name_en': 'kanon_fukuda',
+        'name_jp': '福田花音',
+        'birthday': '1995年3月12日',
+        'location': '埼玉県',
+        'group': 'angerme'
+    }
+
+    m4 = {
+        'name_en': 'yuka_maeda',
+        'name_jp': '前田憂佳',
+        'birthday': '1994年12月28日',
+        'location': '千葉県',
+        'group': 'angerme'
+    }
+
+    m5 = {
+        'name_en': 'saki_ogawa',
+        'name_jp': '小川紗季',
+        'birthday': '1996年11月18日',
+        'location': '埼玉県',
+        'group': 'angerme'
+    }
+
+    members_to_databases([m1, m2, m3, m4, m5])

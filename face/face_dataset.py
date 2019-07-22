@@ -43,4 +43,7 @@ def face_register(image_path):
 
 
 if __name__ == '__main__':
-    face_register(r'E:\Program\Python\HP_Face\faces\pictures_from_hello_project')
+    m = 'kanon_fukuda.jpg'
+    path = os.path.join(r'E:\Program\Python\HP_Faces\images\helloproject\angerme', m)
+    image = image_to_base64(path)
+    client.addUser(image, 'BASE64', 'Hello_Project', m.split('.', 1)[0])
