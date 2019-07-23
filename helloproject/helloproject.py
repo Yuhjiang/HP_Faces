@@ -116,41 +116,57 @@ if __name__ == '__main__':
     # # members_to_databases(all_members)
     # group_to_database(groups)
     m1 = {
-        'name_en': 'maho_aikawa',
-        'name_jp': '相川茉穂',
-        'birthday': '1999年3月26日',
+        'name_en': 'saki_shimizu',
+        'name_jp': '清水佐紀',
+        'birthday': '1991年11月22日',
         'location': '神奈川県',
-        'group': 'angerme'
+        'group': 'berryzkobo'
     }
     m2 = {
-        'name_en': 'memi_tamura',
-        'name_jp': '田村芽実',
-        'birthday': '1998年10月30日',
-        'location': '群馬県',
-        'group': 'angerme'
+        'name_en': 'momoko_tsugunaga',
+        'name_jp': '嗣永桃子',
+        'birthday': '1992年3月6日',
+        'location': '千葉県',
+        'group': 'berryzkobo'
     }
     m3 = {
-        'name_en': 'kanon_fukuda',
-        'name_jp': '福田花音',
-        'birthday': '1995年3月12日',
-        'location': '埼玉県',
-        'group': 'angerme'
+        'name_en': 'chinami_tokunaga',
+        'name_jp': '徳永千奈美',
+        'birthday': '1992年5月22日',
+        'location': '神奈川県',
+        'group': 'berryzkobo'
     }
 
     m4 = {
-        'name_en': 'yuka_maeda',
-        'name_jp': '前田憂佳',
-        'birthday': '1994年12月28日',
-        'location': '千葉県',
-        'group': 'angerme'
+        'name_en': 'maasa_sudou',
+        'name_jp': '須藤茉麻',
+        'birthday': '1992年7月3日',
+        'location': '東京都',
+        'group': 'berryzkobo'
     }
 
     m5 = {
-        'name_en': 'saki_ogawa',
-        'name_jp': '小川紗季',
-        'birthday': '1996年11月18日',
-        'location': '埼玉県',
-        'group': 'angerme'
+        'name_en': 'miyabi_natsuyaki',
+        'name_jp': '夏焼雅',
+        'birthday': '1992年8月25日',
+        'location': '千葉県',
+        'group': 'berryzkobo'
+    }
+    m6 = {
+        'name_en': 'yurina_kumai',
+        'name_jp': '熊井友理奈',
+        'birthday': '1993年8月3日',
+        'location': '神奈川県',
+        'group': 'berryzkobo'
     }
 
-    members_to_databases([m1, m2, m3, m4, m5])
+    m7= {
+        'name_en': 'risako_sugaya',
+        'name_jp': '菅谷梨沙子',
+        'birthday': '1994年4月4日',
+        'location': '神奈川県',
+        'group': 'berryzkobo'
+    }
+
+
+    members_to_databases([m1, m2, m3, m4, m5, m6, m7])

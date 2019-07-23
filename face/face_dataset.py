@@ -43,7 +43,7 @@ def face_register(image_path):
 
 
 if __name__ == '__main__':
-    m = 'kanon_fukuda.jpg'
-    path = os.path.join(r'E:\Program\Python\HP_Faces\images\helloproject\angerme', m)
+    m = 'yurina_kumai.jpg'
+    path = os.path.join(r'E:\Program\Python\HP_Faces\images\helloproject\berryzkobo', m)
     image = image_to_base64(path)
     client.addUser(image, 'BASE64', 'Hello_Project', m.split('.', 1)[0])

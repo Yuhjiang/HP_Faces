@@ -2,3 +2,4 @@
 .pytest_cache
 images
 test_report
+backups
